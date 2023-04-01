@@ -1,0 +1,85 @@
+/* Removes margin and padding*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*sets body height to 100%, otherwise divs do not center on webpage*/
+html, body{
+    height:100%;
+    background-image: url(/Resources/background.png);
+    background-position: center; 
+    background-size: 100% 100%;
+}
+
+/*formats and centers the body using flex, hides cursor and overflow for animation*/
+body{
+    font-family:cursive;
+    background-color: green;
+    color: wheat;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: none;
+}
+
+/*font size*/
+.score{
+    font-size: 4rem;
+}
+
+/*Uses CSS Grid to set a 3x3 grid at "1 fraction"*/
+.board{
+    height: 36rem;
+    width: 36rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 80px;
+}
+
+/*formats the holes for the moles. Overflow cutsoff image outside of div*/
+.hole{
+    background-color: rgb(157, 76, 10);
+    border-radius: 50%;
+    box-shadow: inset 0rem 1.618rem 1rem 0rem rgb(30, 11, 3);
+    position: relative; 
+    overflow: hidden;
+}
+/*positions and animates the image of the mole in the center and bottom of the hole*/
+.hole .mole{
+    width: 61.8%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    animation: rise .618s ease-out;
+}
+/*animates the mole*/
+@keyframes rise {
+    0%{
+        transform: translateX(-50%) translateY(100%);
+    }
+    100%{
+        transform: translateX(-50%) translateY(0);
+    }
+}
+/*styles the cursor, along with animation properties. Tranform is to center the image on the cursor and rotate on clickdown.*/ 
+.cursor {
+    height: 7rem;
+    width: 7rem;
+    position:absolute;
+    background-image: url('Resources/hammer.png');
+    background-size: 100%;
+    transform: translate(-30%, -30%);
+    transition: transform .01s;
+    pointer-events: none;
+
+}
+
+/*activates the cursor when called*/
+.cursor.active{
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
